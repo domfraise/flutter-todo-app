@@ -12,8 +12,9 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: Text('List'),
           ),
-          body: ListManager()
-      ),
+          body: Center(
+            child: ListManager("YOOOO"),
+          )),
     );
   }
 }
