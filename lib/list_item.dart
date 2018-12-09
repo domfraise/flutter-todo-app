@@ -12,7 +12,7 @@ class ListItem extends StatelessWidget {
       child: Column(
         children: <Widget>[
           ListTile(
-            title: Text(content),
+            title: Center(child: Text(content),)
           ),
         ],
       ),

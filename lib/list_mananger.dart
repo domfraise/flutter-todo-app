@@ -29,6 +29,8 @@ class _ListManagerState extends State<ListManager> {
         Container(
           margin: EdgeInsets.all(10.0),
           child: RaisedButton(
+            color: Theme.of(context).primaryColor,
+            colorBrightness: Brightness.dark,
             onPressed: () {
               setState(() {
                 _listItems.add("Hello");
