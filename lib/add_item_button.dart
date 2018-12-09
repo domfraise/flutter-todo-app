@@ -9,16 +9,13 @@ class AddItemButton extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
-      margin: EdgeInsets.all(10.0),
-      child: RaisedButton(
+    return RaisedButton(
         color: Theme.of(context).primaryColor,
         colorBrightness: Brightness.dark,
         onPressed: () {
           addItem(text);
         },
         child: Text('Add Item'),
-      ),
     );
   }
 

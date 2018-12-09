@@ -19,7 +19,7 @@ class TextInputState extends State<TextInput>{
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(20.0),
+      margin: EdgeInsets.fromLTRB(0,0,10.0,0),
       child: TextField(
         controller: widget._textEditingController,
       ),

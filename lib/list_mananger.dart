@@ -43,11 +43,14 @@ class _ListManagerState extends State<ListManager> {
     textController = TextEditingController();
     return Column(
       children: <Widget>[
-        Row(
-          children: <Widget>[
-            Expanded(child: TextInput(textController),),
-            AddItemButton(textController.text, _addItem),
-          ],
+        Container(
+          margin: EdgeInsets.all(20.0),
+          child: Row(
+            children: <Widget>[
+              Expanded(child: TextInput(textController)),
+              AddItemButton(textController.text, _addItem),
+            ],
+          ),
         ),
         ListItems(_listItems, _removeItem)
       ],
