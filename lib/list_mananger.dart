@@ -15,17 +15,27 @@ class ListManager extends StatefulWidget {
 
 class _ListManagerState extends State<ListManager> {
   List<String> _listItems = [];
-
+  String input = "";
+  TextEditingController textontroller;
 
   @override
   void initState() {
     _listItems.add(widget.existingItems);
+    print(textontroller);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
+    textontroller = TextEditingController();
     return Column(
       children: <Widget>[
+        Container(
+          margin: EdgeInsets.all(10.0),
+          child: TextField(
+            controller: textontroller,
+          ),
+        ),
         Container(
           margin: EdgeInsets.all(10.0),
           child: RaisedButton(
@@ -33,7 +43,8 @@ class _ListManagerState extends State<ListManager> {
             colorBrightness: Brightness.dark,
             onPressed: () {
               setState(() {
-                _listItems.add("Hello");
+                print (textontroller);
+                _listItems.add(textontroller.text);
               });
             },
             child: Text('Button'),
