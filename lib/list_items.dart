@@ -10,12 +10,14 @@ class ListItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: listItems.map(
-            (element) => ListItem(element),
-          )
-          .toList(),
+    return Flexible(
+      child: ListView(
+        children: listItems
+            .map(
+              (element) => ListItem(element),
+            )
+            .toList(),
+      ),
     );
   }
 }

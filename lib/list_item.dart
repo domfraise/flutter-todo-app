@@ -8,14 +8,11 @@ class ListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Card(
-      child: Column(
-        children: <Widget>[
-          ListTile(
-            title: Center(child: Text(content),)
-          ),
-        ],
-      ),
-    );
+    return ListTile(
+        title: Center(
+          child: Text(content),
+        ),
+      );
+
   }
 }
