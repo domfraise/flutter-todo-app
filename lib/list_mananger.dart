@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './list_items.dart';
+import './add_item_button.dart';
 
 class ListManager extends StatefulWidget {
   final String existingItems;
@@ -16,40 +17,32 @@ class ListManager extends StatefulWidget {
 class _ListManagerState extends State<ListManager> {
   List<String> _listItems = [];
   String input = "";
-  TextEditingController textontroller;
+  TextEditingController textController;
+
+  void _addItem(String item){
+    setState(() {
+      _listItems.add(textController.text);
+    });
+  }
 
   @override
   void initState() {
     _listItems.add(widget.existingItems);
-    print(textontroller);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    textontroller = TextEditingController();
+    textController = TextEditingController();
     return Column(
       children: <Widget>[
         Container(
           margin: EdgeInsets.all(10.0),
           child: TextField(
-            controller: textontroller,
+            controller: textController,
           ),
         ),
-        Container(
-          margin: EdgeInsets.all(10.0),
-          child: RaisedButton(
-            color: Theme.of(context).primaryColor,
-            colorBrightness: Brightness.dark,
-            onPressed: () {
-              setState(() {
-                print (textontroller);
-                _listItems.add(textontroller.text);
-              });
-            },
-            child: Text('Button'),
-          ),
-        ),
+        AddItemButton(textController.text, _addItem),
         ListItems(_listItems)
       ],
     );
