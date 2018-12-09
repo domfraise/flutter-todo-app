@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import './list_items.dart';
 import './add_item_button.dart';
+import './text_input.dart';
 
 class ListManager extends StatefulWidget {
   final String existingItems;
@@ -36,12 +37,7 @@ class _ListManagerState extends State<ListManager> {
     textController = TextEditingController();
     return Column(
       children: <Widget>[
-        Container(
-          margin: EdgeInsets.all(10.0),
-          child: TextField(
-            controller: textController,
-          ),
-        ),
+        TextInput(textController),
         AddItemButton(textController.text, _addItem),
         ListItems(_listItems)
       ],
