@@ -10,10 +10,9 @@ class ListItem extends StatefulWidget {
     // TODO: implement createState
     return ListItemState();
   }
-
 }
 
-class ListItemState extends State<ListItem>{
+class ListItemState extends State<ListItem> {
   bool isDone = false;
 
   @override
@@ -31,7 +30,13 @@ class ListItemState extends State<ListItem>{
               },
               value: isDone,
             ),
-            Text(widget.content),
+            Expanded(
+              child: Text(widget.content),
+            ),
+            MaterialButton(
+              onPressed: null,
+              child: Icon(const IconData(0xe872, fontFamily: 'MaterialIcons')),
+            ),
           ],
         ),
       ),
