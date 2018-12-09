@@ -20,13 +20,13 @@ class _ListManagerState extends State<ListManager> {
   String input = "";
   TextEditingController textController;
 
-  void _addItem(String item){
+  void _addItem(String item) {
     setState(() {
       _listItems.add(textController.text);
     });
   }
 
-  void _removeItem(String item){
+  void _removeItem(String item) {
     setState(() {
       _listItems.remove(item);
     });
@@ -43,8 +43,12 @@ class _ListManagerState extends State<ListManager> {
     textController = TextEditingController();
     return Column(
       children: <Widget>[
-        TextInput(textController),
-        AddItemButton(textController.text, _addItem),
+        Row(
+          children: <Widget>[
+            Expanded(child: TextInput(textController),),
+            AddItemButton(textController.text, _addItem),
+          ],
+        ),
         ListItems(_listItems, _removeItem)
       ],
     );

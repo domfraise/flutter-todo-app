@@ -35,7 +35,7 @@ class ListItemState extends State<ListItem> {
               child: Text(widget.content),
             ),
             MaterialButton(
-              onPressed: (){
+              onPressed: () {
                 widget.removeItem(widget.content);
               },
               child: Icon(
