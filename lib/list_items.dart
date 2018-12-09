@@ -4,8 +4,8 @@ import './list_item.dart';
 
 class ListItems extends StatelessWidget {
   final List<String> listItems;
-
-  ListItems(this.listItems);
+  final Function removeItem;
+  ListItems(this.listItems, this.removeItem);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class ListItems extends StatelessWidget {
       child: ListView(
         children: listItems
             .map(
-              (element) => ListItem(element),
+              (element) => ListItem(element, removeItem),
             )
             .toList(),
       ),

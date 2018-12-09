@@ -26,6 +26,12 @@ class _ListManagerState extends State<ListManager> {
     });
   }
 
+  void _removeItem(String item){
+    setState(() {
+      _listItems.remove(item);
+    });
+  }
+
   @override
   void initState() {
     _listItems.add(widget.existingItems);
@@ -39,7 +45,7 @@ class _ListManagerState extends State<ListManager> {
       children: <Widget>[
         TextInput(textController),
         AddItemButton(textController.text, _addItem),
-        ListItems(_listItems)
+        ListItems(_listItems, _removeItem)
       ],
     );
   }

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class ListItem extends StatefulWidget {
   final String content;
+  final Function removeItem;
 
-  ListItem(this.content);
+  ListItem(this.content, this.removeItem);
 
   @override
   State<StatefulWidget> createState() {
@@ -34,8 +35,12 @@ class ListItemState extends State<ListItem> {
               child: Text(widget.content),
             ),
             MaterialButton(
-              onPressed: null,
-              child: Icon(const IconData(0xe872, fontFamily: 'MaterialIcons')),
+              onPressed: (){
+                widget.removeItem(widget.content);
+              },
+              child: Icon(
+                const IconData(0xe872, fontFamily: 'MaterialIcons'),
+              ),
             ),
           ],
         ),
