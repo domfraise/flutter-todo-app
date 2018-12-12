@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
             title: Text('List'),
           ),
           body: Center(
-            child: ListManager("YOOOO"),
+            child: ListManager(),
           )),
     );
   }

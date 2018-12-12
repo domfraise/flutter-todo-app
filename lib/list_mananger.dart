@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import './list_items.dart';
 import './add_item_button.dart';
 import './text_input.dart';
+import './list_repository.dart';
 
 class ListManager extends StatefulWidget {
-  final String existingItems;
-
-  ListManager(this.existingItems);
+  final ListRepository listRepository = ListRepository();
 
   @override
   State<StatefulWidget> createState() {
@@ -34,7 +33,9 @@ class _ListManagerState extends State<ListManager> {
 
   @override
   void initState() {
-    _listItems.add(widget.existingItems);
+    widget.listRepository
+        .getList()
+        .then((result) => setState(() => _listItems = result));
     super.initState();
   }
 
