@@ -6,7 +6,6 @@ import './text_input.dart';
 import './list_repository.dart';
 
 class ListManager extends StatefulWidget {
-  final ListRepository listRepository = ListRepository();
 
   @override
   State<StatefulWidget> createState() {
@@ -15,6 +14,7 @@ class ListManager extends StatefulWidget {
 }
 
 class _ListManagerState extends State<ListManager> {
+  final ListRepository listRepository = ListRepository();
   List<String> _listItems = [];
   String input = "";
   TextEditingController textController;
@@ -22,18 +22,20 @@ class _ListManagerState extends State<ListManager> {
   void _addItem(String item) {
     setState(() {
       _listItems.add(textController.text);
+      listRepository.updateList(_listItems);
     });
   }
 
   void _removeItem(String item) {
     setState(() {
       _listItems.remove(item);
+      listRepository.updateList(_listItems);
     });
   }
 
   @override
   void initState() {
-    widget.listRepository
+    listRepository
         .getList()
         .then((result) => setState(() => _listItems = result));
     super.initState();
