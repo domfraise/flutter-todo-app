@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import './list_mananger.dart';
 import './firebase/authentication_service.dart';
@@ -13,6 +14,22 @@ class TodoApp extends StatefulWidget {
 
 class TodoState extends State<TodoApp> {
   AuthenticationService authenticationService = AuthenticationService();
+  FirebaseUser firebaseUser;
+
+//  String displayName = "";
+
+  @override
+  void initState() {
+//    authenticationService.getDisplayName()
+//        .then((name) {
+//          setState(() {
+//            displayName = name;
+//            print(displayName);
+//          });
+//
+//    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +43,14 @@ class TodoState extends State<TodoApp> {
         body: Center(
           child: ListManager(),
         ),
-        floatingActionButton: FloatingActionButton(
-            onPressed: () => authenticationService.callback()),
+        floatingActionButton: FloatingActionButton(onPressed: () {
+          setState(() {
+            authenticationService.handleSignIn().then((user) {
+//              print(firebaseUser);
+//              firebaseUser = user;
+            });
+          });
+        }),
       ),
     );
   }

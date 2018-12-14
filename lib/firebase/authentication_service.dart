@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthenticationService {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  FirebaseUser _user;
 
   Future<FirebaseUser> _handleSignIn() async {
     GoogleSignInAccount googleUser = await _googleSignIn.signIn();
@@ -13,7 +12,6 @@ class AuthenticationService {
       idToken: googleAuth.idToken,
     );
     print("signed in " + user.displayName);
-    this._user = user;
     return user;
   }
 
@@ -23,7 +21,12 @@ class AuthenticationService {
         .catchError((e) => print(e));
   }
 
-  getUser(){
-    return _user == null ? "User" : _user.displayName;
+  Future<FirebaseUser> getUser() async {
+    return _auth.currentUser();
+  }
+
+  Future<String> getDisplayName() async {
+    var user = await getUser();
+    return user == null ? "" : user.displayName;
   }
 }

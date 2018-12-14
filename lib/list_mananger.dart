@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tutorial/firebase/list_repository.dart';
 
 import './list_items.dart';
 import './add_item_button.dart';
 import './text_input.dart';
-import './list_repository.dart';
 
 class ListManager extends StatefulWidget {
 
