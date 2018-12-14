@@ -15,8 +15,8 @@ class TodoApp extends StatefulWidget {
 class TodoState extends State<TodoApp> {
   AuthenticationService authenticationService = AuthenticationService();
   FirebaseUser firebaseUser;
-
-//  String displayName = "";
+  var brightness = Brightness.light;
+  var isDarkTheme = false;
 
   @override
   void initState() {
@@ -35,21 +35,31 @@ class TodoState extends State<TodoApp> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(primarySwatch: Colors.blue, brightness: brightness),
       home: Scaffold(
         appBar: AppBar(
+          actions: <Widget>[
+            Switch(
+              onChanged: (isDarkTheme) {
+                setState(() {
+                  if (isDarkTheme ){
+                    brightness = Brightness.dark;
+                  } else {
+                    brightness = Brightness.light;
+                  }
+                  this.isDarkTheme = isDarkTheme;
+                });
+              },
+              value: isDarkTheme,
+            )
+          ],
           title: Text(' List '),
         ),
         body: Center(
           child: ListManager(),
         ),
         floatingActionButton: FloatingActionButton(onPressed: () {
-          setState(() {
-            authenticationService.handleSignIn().then((user) {
-//              print(firebaseUser);
-//              firebaseUser = user;
-            });
-          });
+          setState(() {});
         }),
       ),
     );
