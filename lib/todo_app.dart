@@ -35,14 +35,17 @@ class TodoState extends State<TodoApp> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.blue, brightness: brightness),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        brightness: brightness,
+      ),
       home: Scaffold(
         appBar: AppBar(
           actions: <Widget>[
             Switch(
               onChanged: (isDarkTheme) {
                 setState(() {
-                  if (isDarkTheme ){
+                  if (isDarkTheme) {
                     brightness = Brightness.dark;
                   } else {
                     brightness = Brightness.light;
@@ -51,16 +54,20 @@ class TodoState extends State<TodoApp> {
                 });
               },
               value: isDarkTheme,
+              activeColor: Theme.of(context).primaryColorDark,
             )
           ],
           title: Text(' List '),
         ),
         body: Center(
-          child: ListManager(),
+          child: ListManager(brightness),
         ),
-        floatingActionButton: FloatingActionButton(onPressed: () {
-          setState(() {});
-        }),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            setState(() {});
+          },
+          backgroundColor: Theme.of(context).primaryColor,
+        ),
       ),
     );
   }

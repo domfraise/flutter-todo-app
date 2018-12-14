@@ -6,6 +6,9 @@ import './add_item_button.dart';
 import './text_input.dart';
 
 class ListManager extends StatefulWidget {
+  final Brightness brightness;
+
+  ListManager(this.brightness);
 
   @override
   State<StatefulWidget> createState() {
