@@ -34,6 +34,15 @@ class ListRepository {
     return item;
   }
 
+  void updateItem(Item item) {
+    firestore
+        .collection("TodoLists")
+        .document("List")
+        .collection("ListItems")
+        .document(item.id)
+        .updateData({"message": item.message, "isDone": item.isDone});
+  }
+
   Future<void> removeItem(Item item) async {
     await firestore
         .collection("TodoLists")

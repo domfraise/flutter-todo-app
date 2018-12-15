@@ -38,6 +38,10 @@ class _ListManagerState extends State<ListManager> {
     });
   }
 
+  void _updateItem(Item item) {
+    listRepository.updateItem(item);
+  }
+
   @override
   void initState() {
     listRepository
@@ -59,7 +63,7 @@ class _ListManagerState extends State<ListManager> {
             ],
           ),
         ),
-        ListItems(_listItems, _removeItem)
+        ListItems(_listItems, _removeItem, _updateItem)
       ],
     );
   }

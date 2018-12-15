@@ -3,9 +3,10 @@ import 'package:tutorial/model/item.dart';
 
 class ListItem extends StatefulWidget {
   final Function removeItem;
+  final Function updateItem;
   final Item item;
 
-  ListItem(this.item, this.removeItem);
+  ListItem(this.item, this.removeItem, this.updateItem);
 
   @override
   State<StatefulWidget> createState() {
@@ -26,6 +27,7 @@ class ListItemState extends State<ListItem> {
               onChanged: (value) {
                 setState(() {
                   widget.item.isDone = value;
+                  widget.updateItem(widget.item);
                 });
               },
               value: widget.item.isDone,
