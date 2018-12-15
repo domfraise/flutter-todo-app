@@ -31,14 +31,14 @@ class _ListManagerState extends State<ListManager> {
     });
   }
 
-  void _removeItem(Item item) {
+  void _removeItem(Item item) async {
     listRepository.removeItem(item);
     setState(() {
       _listItems.remove(item);
     });
   }
 
-  void _updateItem(Item item) {
+  void _updateItem(Item item) async {
     listRepository.updateItem(item);
   }
 

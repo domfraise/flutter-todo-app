@@ -34,7 +34,7 @@ class ListRepository {
     return item;
   }
 
-  void updateItem(Item item) {
+  void updateItem(Item item) async {
     firestore
         .collection("TodoLists")
         .document("List")
