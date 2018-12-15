@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tutorial/model/item.dart';
 
 import './list_item.dart';
 
 class ListItems extends StatelessWidget {
-  final List<String> listItems;
+  final List<Item> listItems;
   final Function removeItem;
 
   ListItems(this.listItems, this.removeItem);

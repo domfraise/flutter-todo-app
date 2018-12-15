@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tutorial/model/item.dart';
 
 class AddItemButton extends StatelessWidget{
   final Function addItem;
-  final String text;
+  final TextEditingController textController;
 
-  AddItemButton(this.text, this.addItem);
+  AddItemButton(this.textController, this.addItem);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class AddItemButton extends StatelessWidget{
         color: Theme.of(context).primaryColor,
         colorBrightness: Brightness.dark,
         onPressed: () {
-          addItem(text);
+          addItem(Item(textController.text, false));
         },
         child: Text('Add Item'),
     );

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tutorial/model/item.dart';
 
 class ListItem extends StatefulWidget {
-  final String content;
   final Function removeItem;
+  final Item item;
 
-  ListItem(this.content, this.removeItem);
+  ListItem(this.item, this.removeItem);
 
   @override
   State<StatefulWidget> createState() {
@@ -14,8 +15,6 @@ class ListItem extends StatefulWidget {
 }
 
 class ListItemState extends State<ListItem> {
-  bool isDone = false;
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -26,17 +25,17 @@ class ListItemState extends State<ListItem> {
             Checkbox(
               onChanged: (value) {
                 setState(() {
-                  isDone = value;
+                  widget.item.isDone = value;
                 });
               },
-              value: isDone,
+              value: widget.item.isDone,
             ),
             Expanded(
-              child: Text(widget.content),
+              child: Text(widget.item.message),
             ),
             MaterialButton(
               onPressed: () {
-                widget.removeItem(widget.content);
+                widget.removeItem(widget.item);
               },
               child: Icon(
                 const IconData(0xe872, fontFamily: 'MaterialIcons'),

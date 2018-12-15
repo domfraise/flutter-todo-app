@@ -1,16 +1,45 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tutorial/model/item.dart';
 
-class ListRepository{
-
+class ListRepository {
   final Firestore firestore = Firestore.instance;
 
-  Future<List<String>> getList() async {
-    var response = await firestore.collection('TodoLists').document('List').get();
-    return List<String>.from(response.data["values"]);
+  Future<List<Item>> getList() async {
+    var querySnapshot = await firestore
+        .collection('TodoLists')
+        .document('List')
+        .collection("ListItems")
+        .getDocuments();
+    var items = querySnapshot.documents.map((snapshot) {
+      return Item.withId(snapshot.documentID, snapshot.data['message'],
+          snapshot.data['isDone']);
+    });
+    return List<Item>.from(items);
   }
 
-  void updateList(List<String> newList){
-    firestore.collection("TodoLists").document("List").setData({"values": newList});
+  void updateList(List<String> newList) {
+    firestore
+        .collection("TodoLists")
+        .document("List")
+        .setData({"values": newList});
   }
 
+  Future<Item> addItem(Item item) async {
+    var docRef = await firestore
+        .collection("TodoLists")
+        .document("List")
+        .collection("ListItems")
+        .add({"message": item.message, "isDone": item.isDone});
+    item.id = docRef.documentID;
+    return item;
+  }
+
+  Future<void> removeItem(Item item) async {
+    await firestore
+        .collection("TodoLists")
+        .document("List")
+        .collection("ListItems")
+        .document(item.id)
+        .delete();
+  }
 }

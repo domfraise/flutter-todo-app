@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tutorial/firebase/list_repository.dart';
+import 'package:tutorial/model/item.dart';
 
 import './list_items.dart';
 import './add_item_button.dart';
@@ -18,21 +19,22 @@ class ListManager extends StatefulWidget {
 
 class _ListManagerState extends State<ListManager> {
   final ListRepository listRepository = ListRepository();
-  List<String> _listItems = [];
+  List<Item> _listItems = [];
   String input = "";
-  TextEditingController textController;
+  TextEditingController textController = TextEditingController();
 
-  void _addItem(String item) {
+  void _addItem(Item item) async {
+    var itemWithId = await listRepository.addItem(item);
     setState(() {
-      _listItems.add(textController.text);
-      listRepository.updateList(_listItems);
+      textController.text = "";
+      _listItems.add(itemWithId);
     });
   }
 
-  void _removeItem(String item) {
+  void _removeItem(Item item) {
+    listRepository.removeItem(item);
     setState(() {
       _listItems.remove(item);
-      listRepository.updateList(_listItems);
     });
   }
 
@@ -46,7 +48,6 @@ class _ListManagerState extends State<ListManager> {
 
   @override
   Widget build(BuildContext context) {
-    textController = TextEditingController();
     return Column(
       children: <Widget>[
         Container(
@@ -54,7 +55,7 @@ class _ListManagerState extends State<ListManager> {
           child: Row(
             children: <Widget>[
               Expanded(child: TextInput(textController)),
-              AddItemButton(textController.text, _addItem),
+              AddItemButton(textController, _addItem),
             ],
           ),
         ),
