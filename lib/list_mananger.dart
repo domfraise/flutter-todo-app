@@ -63,7 +63,7 @@ class _ListManagerState extends State<ListManager> {
             ],
           ),
         ),
-        ListItems(_listItems, _removeItem, _updateItem)
+        ListItems(_listItems, _removeItem, _updateItem, listRepository.getListStream)
       ],
     );
   }

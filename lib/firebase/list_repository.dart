@@ -17,6 +17,13 @@ class ListRepository {
     return List<Item>.from(items);
   }
 
+  Stream<QuerySnapshot> getListStream() {
+    return firestore.collection('TodoLists')
+        .document('List')
+        .collection("ListItems")
+        .snapshots();
+  }
+
   void updateList(List<String> newList) {
     firestore
         .collection("TodoLists")
