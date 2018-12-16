@@ -28,7 +28,8 @@ class ListItemState extends State<ListItem>
       duration: Duration(seconds: 1),
       vsync: this,
     );
-    animation = Tween(begin: 20.0, end: 45.0).animate(animationController)
+    animation = Tween(begin: 30.0, end: 40.0).animate(
+        CurvedAnimation(parent: animationController, curve: Curves.bounceOut))
       ..addListener(() {
         setState(() {});
       });
