@@ -32,14 +32,20 @@ class ListItemState extends State<ListItem>
       ..addListener(() {
         setState(() {});
       });
-    animation.addStatusListener((status){
-      if (status == AnimationStatus.completed){
+    animation.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
         animationController.reverse();
-      } else if (status == AnimationStatus.dismissed){
+      } else if (status == AnimationStatus.dismissed) {
         animationController.forward();
       }
     });
     animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -62,11 +68,12 @@ class ListItemState extends State<ListItem>
               child: Text(widget.item.message),
             ),
             MaterialButton(
-              onPressed: () {
-                widget.removeItem(widget.item);
-              },
-              child: AnimatedIcon(animation: animation,)
-            ),
+                onPressed: () {
+                  widget.removeItem(widget.item);
+                },
+                child: AnimatedIcon(
+                  animation: animation,
+                )),
           ],
         ),
       ),
