@@ -57,19 +57,30 @@ class TodoState extends State<TodoApp> {
               activeColor: Theme.of(context).primaryColorDark,
             )
           ],
-          title: Text(' List '),
+          title: _buildAppbar(),
         ),
         body: Center(
           child: ListManager(brightness),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            setState(() {});
+            authenticationService.handleSignIn().then((user) {
+              setState(() {
+                firebaseUser = user;
+              });
+            });
           },
           backgroundColor: Theme.of(context).primaryColor,
         ),
       ),
     );
+  }
+
+  _buildAppbar() {
+    if (firebaseUser == null) {
+      return Text("List");
+    }
+    return Text("${firebaseUser.displayName}'s List");
   }
 
   void _showAlert(BuildContext context) {

@@ -4,7 +4,7 @@ class AuthenticationService {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<FirebaseUser> _handleSignIn() async {
+  Future<FirebaseUser> handleSignIn() async {
     GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     GoogleSignInAuthentication googleAuth = await googleUser.authentication;
     FirebaseUser user = await _auth.signInWithGoogle(
@@ -13,12 +13,6 @@ class AuthenticationService {
     );
     print("signed in " + user.displayName);
     return user;
-  }
-
-  callback(){
-    _handleSignIn()
-    .then((FirebaseUser user) => print(user))
-        .catchError((e) => print(e));
   }
 
   Future<FirebaseUser> getUser() async {
