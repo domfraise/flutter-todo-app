@@ -71,4 +71,14 @@ class TodoState extends State<TodoApp> {
       ),
     );
   }
+
+  void _showAlert(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text("Wifi"),
+          content: Text("Wifi not detected. Please activate it."),
+        )
+    );
+  }
 }

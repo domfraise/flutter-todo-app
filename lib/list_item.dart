@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tutorial/model/item.dart';
+import 'package:flutter/animation.dart';
 
 class ListItem extends StatefulWidget {
   final Function removeItem;
@@ -15,7 +16,32 @@ class ListItem extends StatefulWidget {
   }
 }
 
-class ListItemState extends State<ListItem> {
+class ListItemState extends State<ListItem>
+    with SingleTickerProviderStateMixin {
+  Animation animation;
+  AnimationController animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    animationController = AnimationController(
+      duration: Duration(seconds: 1),
+      vsync: this,
+    );
+    animation = Tween(begin: 20.0, end: 45.0).animate(animationController)
+      ..addListener(() {
+        setState(() {});
+      });
+    animation.addStatusListener((status){
+      if (status == AnimationStatus.completed){
+        animationController.reverse();
+      } else if (status == AnimationStatus.dismissed){
+        animationController.forward();
+      }
+    });
+    animationController.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -39,13 +65,25 @@ class ListItemState extends State<ListItem> {
               onPressed: () {
                 widget.removeItem(widget.item);
               },
-              child: Icon(
-                const IconData(0xe872, fontFamily: 'MaterialIcons'),
-              ),
+              child: AnimatedIcon(animation: animation,)
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class AnimatedIcon extends AnimatedWidget {
+  AnimatedIcon({Key key, Animation animation})
+      : super(key: key, listenable: animation);
+
+  @override
+  Widget build(BuildContext context) {
+    Animation animation = listenable;
+    return Icon(
+      const IconData(0xe872, fontFamily: 'MaterialIcons'),
+      size: animation.value,
     );
   }
 }
